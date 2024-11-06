@@ -1,17 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\admin;
 
-use Log;
-use Exception;
 use App\Models\User;
-use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
@@ -52,19 +47,20 @@ class AuthController extends Controller
         return response()->json(['success' => false, 'message' => 'User not found'], 404);
     }
 
-    public function update(Request $request, $id)
-    {
-        $user = User::find($id);
-        if ($user) {
-            $user->name = $request->input('name');
-            $user->email = $request->input('email');
-            $user->is_admin = $request->input('is_admin');
-            $user->save();
+    // public function update(Request $request, $id)
+    // {
+    //     $user = User::find($id);
+    //     if ($user) {
+    //         $user->name = $request->input('name');
+    //         $user->email = $request->input('email');
+    //         $user->is_admin = $request->input('is_admin');
+    //         $user->save();
 
-            return response()->json(['success' => true]);
-        }
-        return response()->json(['success' => false, 'message' => 'User not found'], 404);
-    }
+    //         return response()->json(['success' => true]);
+    //     }
+    //     return response()->json(['success' => false, 'message' => 'User not found'], 404);
+    // }
+   
 
     public function destroy($id){
         $user = User::findOrFail($id);
@@ -97,23 +93,28 @@ class AuthController extends Controller
         return redirect('/mstr')->with('logout', 'Succes Logout');
     }
 
-    public function authChange(Request $request, $id){
-        $rules = [
-            'email' => 'required|email',
+    public function authChange(Request $request){
+        $validator = Validator::make($request->all(), [
+            'current_password' => 'required|string|min:8|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
             'password' => 'required|string|min:8|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
-        ];
+        ]);
 
-        $currentUser = Auth::user();
-        $validatedData = $request->validate($rules);
-        if (password_verify($request->input('oldPassword'), $currentUser->password)) {
-            $validatedData['password'] = Hash::make($request->input('password'));
-            User::where('id', $id)->update($validatedData);
-            Auth::logout();
-            $request->session()->invalidate();
-            $request->session()->regenerateToken();
-            return redirect('/mstr/auth')->with('changePassword', 'Email atau Password berhasil diperbarui');
-        } else {
-            return back()->with('incorrect', 'Password saat ini tidak benar');
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => $validator->errors()->first()
+            ], 400);
         }
+        $user = Auth::user();
+        $oldPassword= $user->password;
+        if (password_verify($request->input('current_password'), $oldPassword)) {
+            User::where('id', $user->id)->update([
+                'password' => Hash::make($request->input('password')),
+            ]);
+            return response()->json(['success' => true, 'message' => 'Password updated successfully']);
+        }else{
+            return response()->json(['success' => false, 'message' => 'Current password is incorrect'], 400);
+        }
+        return response()->json(['success' => false, 'message' => 'User not found'], 404);
     }
 }

@@ -41,18 +41,22 @@ class ProfileController extends Controller
             'tentang'=>$request->tentang,
         ];
         if ($request->hasFile('logo')) {
-            $data['logo'] = $request->file('logo')->store('profile');
+            $filePath = $request->file('logo')->store('public/profile');
+            $fileName = str_replace('public/', '', $filePath);
+            $data['logo'] = $fileName;
         }
         $profile=Profile::first();
         if (!$profile){
             Profile::insert($data);
             return response()->json([
                 'success' => true,
+                'message' => 'Profile Berhasil di Tambah!',
             ], 200);
         }
-        $profile->update($data);
+        Profile::where('id', $profile->id)->update($data);
         return response()->json([
             'success' => true,
+            'message' => 'Profile Berhasil di Update!',
         ], 200);
     }
 }

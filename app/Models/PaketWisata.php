@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class PaketWisata extends Model
 {
-    protected $fillable = ['nama', 'harga', 'deskripsi', 'slug'];
+    protected $guarded = ['id'];
 
     protected static function boot()
     {

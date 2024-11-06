@@ -1,9 +1,9 @@
 <nav class="pc-sidebar">
     <div class="navbar-wrapper">
         <div class="m-header">
-            <a href="index.html" class="b-brand text-primary">
+            <a href="{{route('dashboard')}}" class="b-brand text-primary">
                 <img src="https://html.phoenixcoded.net/light-able/bootstrap/assets/images/logo-dark.svg"
-                    alt="logo image" class="logo-lg" />
+                    alt="logo image" class="" />
                 <span class="badge bg-brand-color-2 rounded-pill ms-2 theme-version">v1.0</span>
             </a>
         </div>

@@ -3,7 +3,7 @@
 <!-- [Head] start -->
 
 <head>
-    <title>Invoice Rinjani Trekking Special | INV-Rinjani-000459 </title>
+    <title>Invoice Rinjani Trekking Special | INV-Rinjani-000460 </title>
     <!-- [Meta] -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui" />
@@ -1461,8 +1461,8 @@
                                             <h5>Rinjani Trekking Special</h5>
                                         </div>
                                         <div class="col-sm-6 text-sm-end">
-                                            <h6>Date <span class="text-muted f-w-400">23/10/2024</span></h6>
-                                            <h6>Invoice <span class="text-muted f-w-400">INV-Rinjani-000459</span>
+                                            <h6>Date <span class="text-muted f-w-400">{{ date('d/F/Y') }} </span></h6>
+                                            <h6>Invoice <span class="text-muted f-w-400">INV-Rinjani-000460</span>
                                             </h6>
                                         </div>
                                     </div>
@@ -1526,7 +1526,7 @@
                                                 <p class="f-w-500 mb-1 text-end">IDR {{$grand_total}}.00</p>
                                             </div>
                                             <div class="col-7">
-                                                <p class="f-w-200 mb-1 text-start">Deposit <small>({{$qty}} * IDR  {{number_format($depoPrice)}}.00)</small> :</p>
+                                                <p class="f-w-200 mb-1 text-start">Deposit <small>(20 * IDR  {{number_format($depoPrice)}}.00)</small> :</p>
                                             </div>
                                             <div class="col-5">
                                                 <p class="f-w-200 mb-1 text-end text-warning">IDR {{$deposite}}.00</p>
@@ -1573,31 +1573,30 @@
                                                 <p class="f-w-500 mb-1 text-end ">IDR 1.500.000.00</p>
                                             </div>
                                             <div class="col-7">
-                                                <p class="f-w-500 mb-1 text-start">1 participant ticket cancel :</p>
-                                            </div>
-                                            <div class="col-5">
-                                                <p class="f-w-500 mb-1 text-end ">IDR 750.000.00</p>
-                                            </div>
-                                            <div class="col-7">
                                                 <p class="f-w-500 mb-1 text-start">Custom made clothes :</p>
                                             </div>
                                             <div class="col-5">
                                                 <p class="f-w-500 mb-1 text-end ">IDR 1.000.000.00</p>
                                             </div>
                                             <div class="col-7">
+                                                <p class="f-w-500 mb-1 text-start">2 Transportation from Tanjung Mina to airport :</p>
+                                            </div>
+                                            <div class="col-5">
+                                                <p class="f-w-500 mb-1 text-end ">IDR 2.000.000.00</p>
+                                            </div>
+                                            <div class="col-7">
                                                 <p class="f-w-700 mb-1 text-start">Total Addiitonal:</p>
                                             </div>
                                             <div class="col-5">
-                                                <p class="f-w-700 mb-1 text-end ">IDR 11.250.000.00</p>
+                                                <p class="f-w-700 mb-1 text-end ">IDR 12.500.000.00</p>
                                             </div>
                                             <hr>
                                             <div class="col-7">
                                                 <p class="f-w-800 mb-1 text-start">Total Amount ( Amount Due + Addiitonal item)  :</p>
                                             </div>
                                             <div class="col-5">
-                                                <p class="f-w-800 mb-1 text-end ">IDR 42,458,254.00</p>
+                                                <p class="f-w-800 mb-1 text-end ">IDR 46,977,320.00</p>
                                             </div>
-                                            
                                         </div>
                                     </div>
                                     <hr>
